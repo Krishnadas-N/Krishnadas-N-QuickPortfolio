@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {
   Chart as ChartJS,
@@ -37,7 +37,7 @@ interface AnalyticsStats {
   dailyVisits: Array<{ date: string; count: number }>
 }
 
-export default function Dashboard() {
+function DashboardContent() {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   const [stats, setStats] = useState<AnalyticsStats | null>(null)
@@ -351,5 +351,26 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-black flex items-center justify-center">
+          <div className="glass terminal-box rounded-lg p-8 text-center">
+            <div className="text-hacker-green font-mono text-xl mb-4">
+              {'>'} LOADING_ANALYTICS...
+            </div>
+            <div className="w-64 h-1 bg-terminal-bg rounded overflow-hidden">
+              <div className="h-full bg-hacker-green animate-pulse" style={{ width: '60%' }} />
+            </div>
+          </div>
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   )
 }

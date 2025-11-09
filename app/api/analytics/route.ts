@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 
+// Mark this route as dynamic since it uses request.headers
+export const dynamic = 'force-dynamic'
+
 const ANALYTICS_FILE = path.join(process.cwd(), 'data', 'analytics.json')
 
 interface AnalyticsEvent {
