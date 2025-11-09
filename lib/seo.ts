@@ -54,8 +54,8 @@ export function getOpenGraphData() {
     siteName: `${profileData.name} Portfolio`,
   }
 
-  // Ensure URL has protocol
-  const ogUrl = og.url ? ensureUrlProtocol(og.url) : siteUrl
+  // Ensure URL has protocol - check if url exists in og object
+  const ogUrl = (og as any).url ? ensureUrlProtocol((og as any).url) : siteUrl
 
   return {
     ...og,
