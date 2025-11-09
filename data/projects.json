@@ -1,0 +1,52 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Maitri - Socio Doctor Booking System",
+      "description": "A full-fledged social media and appointment platform for mental health patients and doctors.",
+      "longDescription": "Developed an advanced telemedicine and consultation system with real-time chat, video consultations, Google Sign-In, and admin analytics dashboard. Integrated ZegoCloud for video calls, Razorpay for payments, and AWS EC2 for deployment.",
+      "technologies": ["Angular", "Node.js", "Express.js", "MongoDB", "AWS EC2", "Socket.IO", "Tailwind CSS", "ZegoCloud", "Razorpay"],
+      "image": "/projects/maitri.jpg",
+      "github": "https://github.com/Krishnadas-N/Maitri-Socio-Doctor-Booking-Website-Frontend",
+      "live": "https://maitri-wellness.pages.dev/",
+      "featured": true,
+      "category": "Full Stack"
+    },
+    {
+      "id": 2,
+      "title": "FStore - E-commerce Platform",
+      "description": "An e-commerce platform specializing in apparel with secure payments and order management.",
+      "longDescription": "Features include OTP authentication, cart management, discounts, order tracking, and admin dashboards. Integrated Razorpay for payments and deployed using AWS EC2 + NGINX + Route53.",
+      "technologies": ["Node.js", "Express", "EJS", "MongoDB", "AWS", "Razorpay", "Bootstrap"],
+      "image": "/projects/fstore.jpg",
+      "github": "https://github.com/Krishnadas-N/Ecommerce-Project-Fstore.git",
+      "live": "https://f-store-ecommerce.onrender.com/",
+      "featured": true,
+      "category": "E-commerce"
+    },
+    {
+      "id": 3,
+      "title": "Portfolio Analytics Dashboard",
+      "description": "Analytics system for tracking visitors, referrers, and performance metrics for portfolio websites.",
+      "longDescription": "Lightweight analytics tracking using Next.js API routes, JSON logs, and Chart.js. Displays visual metrics like visits, referrers, and engagement insights.",
+      "technologies": ["Next.js", "Chart.js", "Tailwind CSS", "TypeScript"],
+      "image": "/projects/analytics.jpg",
+      "github": "https://github.com/krishnadas/analytics-dashboard",
+      "live": "https://analytics-demo.vercel.app",
+      "featured": false,
+      "category": "Analytics"
+    },
+    {
+      "id": 4,
+      "title": "Serverless Workflow Automation",
+      "description": "Automated backend workflows using AWS Lambda, API Gateway, and YAML pipelines.",
+      "longDescription": "Built serverless event-driven functions using AWS Lambda with Python and Node.js to handle asynchronous data tasks. Configured CI/CD pipelines with YAML automation scripts.",
+      "technologies": ["AWS Lambda", "Python", "Serverless Framework", "YAML", "API Gateway"],
+      "image": "/projects/serverless.jpg",
+      "github": "https://github.com/krishnadas/serverless-workflow",
+      "live": "https://serverless-demo.vercel.app",
+      "featured": false,
+      "category": "Cloud / Automation"
+    }
+  ]
+}

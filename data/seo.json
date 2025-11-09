@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "Krishnadas N - Software Engineer & Full Stack Developer",
+    "description": "Software engineer at RCKR Software specializing in full stack and serverless development. Expert in React, Python, AWS Lambda, and PostgreSQL — building scalable, cloud-native applications.",
+    "keywords": [
+      "Krishnadas N",
+      "software engineer",
+      "full stack developer",
+      "freelancer",
+      "web developer",
+      "react developer",
+      "next.js developer",
+      "typescript developer",
+      "node.js developer",
+      "python developer",
+      "aws developer",
+      "serverless developer",
+      "cloud engineer",
+      "portfolio",
+      "software development",
+      "aws lambda",
+      "api gateway",
+      "postgresql",
+      "yaml",
+      "devops",
+      "serverless architecture",
+      "rckr software",
+      "mern stack developer",
+      "mean stack developer",
+      "seo optimized portfolio"
+    ],
+    "author": "Krishnadas N",
+    "robots": "index, follow",
+    "language": "en"
+  },
+  "openGraph": {
+    "title": "Krishnadas N - Full Stack Developer & Cloud Engineer",
+    "description": "Full stack and serverless developer crafting performant web and cloud solutions. Explore my projects, experience, and achievements.",
+    "type": "website",
+    "image": "/og-image.jpg",
+    "siteName": "Krishnadas N Portfolio"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "Krishnadas N - Software Engineer",
+    "description": "Full stack & serverless developer building scalable, performant web apps.",
+    "image": "/og-image.jpg"
+  },
+  "structuredData": {
+    "person": {
+      "name": "Krishnadas N",
+      "jobTitle": "Software Engineer",
+      "description": "Full stack developer and cloud engineer specializing in React, Python, and AWS Serverless.",
+      "url": "https://krishnadas.info",
+      "sameAs": [
+        "https://linkedin.com/in/krishnadas-n-942441230/",
+        "https://github.com/Krishnadas-N",
+        "https://twitter.com/krishnadas"
+      ],
+      "email": "nkrishnadas.connect@gmail.com"
+    }
+  },
+  "pages": [
+    {
+      "path": "/",
+      "title": "Home - Krishnadas Portfolio",
+      "description": "Software engineer and full stack developer portfolio. View my projects, skills, and experience.",
+      "keywords": ["portfolio", "home", "software engineer", "developer"]
+    },
+    {
+      "path": "/#about",
+      "title": "About - Krishnadas",
+      "description": "Learn more about my journey as a software engineer and cloud developer.",
+      "keywords": ["about", "software engineer", "background", "experience"]
+    },
+    {
+      "path": "/#projects",
+      "title": "Projects - Krishnadas",
+      "description": "Explore my full stack and serverless projects built with React, Python, and AWS.",
+      "keywords": ["projects", "portfolio", "serverless", "cloud", "web development"]
+    },
+    {
+      "path": "/#skills",
+      "title": "Skills - Krishnadas",
+      "description": "Technical skills including React, Python, AWS Lambda, Next.js, and PostgreSQL.",
+      "keywords": ["skills", "technologies", "tools", "programming"]
+    },
+    {
+      "path": "/#experience",
+      "title": "Experience - Krishnadas",
+      "description": "Work experience from RCKR Software and other software engineering roles.",
+      "keywords": ["experience", "career", "software engineer", "work history"]
+    },
+    {
+      "path": "/#contact",
+      "title": "Contact - Krishnadas",
+      "description": "Get in touch for collaborations, freelance work, or opportunities.",
+      "keywords": ["contact", "hire", "collaboration", "freelance"]
+    }
+  ]
+}

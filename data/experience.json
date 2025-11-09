@@ -1,0 +1,53 @@
+{
+  "experiences": [
+    {
+      "id": 1,
+      "title": "Software Engineer",
+      "company": "RCKR Software Pvt Ltd",
+      "location": "Remote / Bangalore, India",
+      "startDate": "2024-01",
+      "endDate": "Present",
+      "current": true,
+      "description": "Developing and maintaining scalable cloud-native web applications with modern architectures. Focused on serverless solutions, API integrations, and workflow automation using AWS services.",
+      "achievements": [
+        "Built and deployed microservices using AWS Lambda, API Gateway, and DynamoDB.",
+        "Improved performance and reduced cloud costs by implementing event-driven systems.",
+        "Developed internal developer tools for automation and testing pipelines using YAML workflows.",
+        "Integrated Python-based backend services with React and AWS Lambda for seamless API orchestration."
+      ],
+      "technologies": ["Python", "React", "PostgreSQL", "AWS Lambda", "Serverless Framework", "YAML", "Node.js", "TypeScript"]
+    },
+    {
+      "id": 2,
+      "title": "MEAN Stack Developer Trainee",
+      "company": "Brototype",
+      "location": "Remote / Kochi, India",
+      "startDate": "2022-01",
+      "endDate": "2023-12",
+      "current": false,
+      "description": "Worked as a MEAN Stack Developer Trainee at Brototype. Learned and implemented the basics of MongoDB, Express.js, Angular, and Node.js. Also learned about the basics of HTML, CSS, and JavaScript.",
+      "achievements": [
+        "Learned and implemented the basics of MongoDB, Express.js, Angular, and Node.js.",
+        "Learned and implemented the basics of HTML, CSS, and JavaScript.",
+        "Learned and implemented the basics of Angular, Node.js, and MongoDB."
+      ],
+      "technologies": [
+        "Angular",
+        "Bootstrap",
+        "CSS",
+        "Data Structures and Algorithms",
+        "DSA",
+        "Express.js",
+        "HTML",
+        "JavaScript",
+        "Material UI",
+        "MongoDB",
+        "Next.js",
+        "Node.js",
+        "React",
+        "Tailwind CSS",
+        "Vue.js"
+      ]
+      }
+  ]
+}

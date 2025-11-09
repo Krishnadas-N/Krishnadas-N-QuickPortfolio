@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;900&display=swap');
+
+:root {
+  --hacker-green: #00ff41;
+  --hacker-cyan: #00ffff;
+  --hacker-purple: #ff00ff;
+  --hacker-red: #ff0040;
+  --dark-bg: #000000;
+  --terminal-bg: #0a0a0a;
+  --terminal-border: #00ff41;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--dark-bg);
+  color: var(--hacker-green);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Matrix background effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 255, 65, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 255, 65, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 3px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scanline effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 255, 65, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+/* Terminal/Console glass effect */
+.glass {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--hacker-green);
+  box-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.3),
+    inset 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+.glass-border {
+  border: 1px solid var(--hacker-green);
+  box-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.5),
+    inset 0 0 10px rgba(0, 255, 65, 0.1);
+}
+
+/* Hacker green neon text - reduced intensity for readability */
+.neon-text {
+  text-shadow: 
+    0 0 5px rgba(0, 255, 65, 0.5),
+    0 0 10px rgba(0, 255, 65, 0.4),
+    0 0 15px rgba(0, 255, 65, 0.3);
+  color: var(--hacker-green);
+}
+
+/* Bright white text with green glow for main headings */
+.neon-text-white {
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.6),
+    0 0 20px rgba(0, 255, 65, 0.4),
+    0 0 30px rgba(0, 255, 65, 0.2);
+}
+
+.neon-text-cyan {
+  text-shadow: 
+    0 0 5px var(--hacker-cyan),
+    0 0 10px var(--hacker-cyan),
+    0 0 15px var(--hacker-cyan),
+    0 0 20px var(--hacker-cyan);
+  color: var(--hacker-cyan);
+}
+
+.neon-text-purple {
+  text-shadow: 
+    0 0 5px var(--hacker-purple),
+    0 0 10px var(--hacker-purple),
+    0 0 15px var(--hacker-purple),
+    0 0 20px var(--hacker-purple);
+  color: var(--hacker-purple);
+}
+
+/* Terminal gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--hacker-green) 0%, var(--hacker-cyan) 50%, var(--hacker-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px var(--hacker-green));
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--hacker-red);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--hacker-cyan);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  20% { clip: rect(54px, 9999px, 11px, 0); }
+  40% { clip: rect(28px, 9999px, 99px, 0); }
+  60% { clip: rect(83px, 9999px, 2px, 0); }
+  80% { clip: rect(23px, 9999px, 16px, 0); }
+  100% { clip: rect(62px, 9999px, 70px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(14px, 9999px, 33px, 0); }
+  40% { clip: rect(79px, 9999px, 85px, 0); }
+  60% { clip: rect(38px, 9999px, 51px, 0); }
+  80% { clip: rect(54px, 9999px, 29px, 0); }
+  100% { clip: rect(92px, 9999px, 98px, 0); }
+}
+
+/* Terminal typing effect */
+.typing {
+  border-right: 2px solid var(--hacker-green);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { border-color: var(--hacker-green); }
+  51%, 100% { border-color: transparent; }
+}
+
+/* Terminal prompt */
+.terminal-prompt::before {
+  content: '> ';
+  color: var(--hacker-green);
+  font-weight: bold;
+}
+
+/* Hacker scan effect */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 65, 0.4),
+    transparent
+  );
+  animation: scan 3s infinite;
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Scrollbar styling - Terminal style */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+  border-left: 1px solid var(--hacker-green);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hacker-green);
+  border: 2px solid var(--terminal-bg);
+  box-shadow: 0 0 10px var(--hacker-green);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hacker-cyan);
+  box-shadow: 0 0 15px var(--hacker-cyan);
+}
+
+/* Smooth animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Selection color - Terminal style */
+::selection {
+  background-color: var(--hacker-green);
+  color: #000000;
+}
+
+/* Focus styles - Hacker green */
+:focus-visible {
+  outline: 2px solid var(--hacker-green);
+  outline-offset: 2px;
+  box-shadow: 0 0 10px var(--hacker-green);
+}
+
+/* Terminal input styling - only apply if not overridden by component */
+input:not([class*="bg-"]):not([class*="border-"]), 
+textarea:not([class*="bg-"]):not([class*="border-"]) {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--hacker-green);
+  color: var(--hacker-green);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+input:not([class*="bg-"]):not([class*="border-"]):focus, 
+textarea:not([class*="bg-"]):not([class*="border-"]):focus {
+  box-shadow: 0 0 15px var(--hacker-green);
+  border-color: var(--hacker-cyan);
+}
+
+/* Button base styles */
+button {
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Ensure buttons are visible - only apply if no background is set */
+button:not([class*="bg-"]):not([class*="glass"]) {
+  background-color: rgba(0, 255, 65, 0.1);
+  border: 1px solid var(--hacker-green);
+  color: var(--hacker-green);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+/* ASCII art style borders */
+.terminal-box {
+  border: 1px solid var(--hacker-green);
+  box-shadow: 
+    0 0 10px rgba(0, 255, 65, 0.5),
+    inset 0 0 10px rgba(0, 255, 65, 0.1);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.terminal-box::before {
+  content: '┌';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  color: var(--hacker-green);
+}
+
+.terminal-box::after {
+  content: '┘';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  color: var(--hacker-green);
+}
+

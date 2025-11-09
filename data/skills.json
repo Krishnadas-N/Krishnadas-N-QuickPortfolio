@@ -1,0 +1,38 @@
+{
+  "categories": [
+    {
+      "name": "Frontend",
+      "skills": [
+        { "name": "React", "level": 95, "icon": "⚛️" },
+        { "name": "Next.js", "level": 90, "icon": "▲" },
+        { "name": "Angular", "level": 88, "icon": "🅰️" },
+        { "name": "TypeScript", "level": 90, "icon": "📘" },
+        { "name": "Tailwind CSS", "level": 92, "icon": "🎨" },
+        { "name": "Framer Motion", "level": 85, "icon": "✨" }
+      ]
+    },
+    {
+      "name": "Backend",
+      "skills": [
+        { "name": "Node.js", "level": 90, "icon": "🟢" },
+        { "name": "Python", "level": 88, "icon": "🐍" },
+        { "name": "Express.js", "level": 87, "icon": "🚀" },
+        { "name": "PostgreSQL", "level": 85, "icon": "🐘" },
+        { "name": "MongoDB", "level": 83, "icon": "🍃" },
+        { "name": "AWS Lambda", "level": 80, "icon": "☁️" }
+      ]
+    },
+    {
+      "name": "Cloud & Tools",
+      "skills": [
+        { "name": "AWS", "level": 82, "icon": "☁️" },
+        { "name": "Serverless Framework", "level": 78, "icon": "⚙️" },
+        { "name": "YAML Automation", "level": 76, "icon": "📄" },
+        { "name": "Docker", "level": 75, "icon": "🐳" },
+        { "name": "Git", "level": 90, "icon": "📦" },
+        { "name": "Vercel", "level": 95, "icon": "▲" },
+        { "name": "Figma", "level": 70, "icon": "🎭" }
+      ]
+    }
+  ]
+}
