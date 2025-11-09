@@ -1,7 +1,16 @@
 import { MetadataRoute } from 'next'
 import seoData from '@/data/seo.json'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+// Ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://yourdomain.com'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com')
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Use pages from seo.json if available

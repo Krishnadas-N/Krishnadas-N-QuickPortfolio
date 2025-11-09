@@ -24,7 +24,16 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+// Ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://yourdomain.com'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com')
 const seoMeta = getSEOMetadata()
 const ogData = getOpenGraphData()
 const twitterData = getTwitterData()

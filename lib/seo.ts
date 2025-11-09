@@ -1,7 +1,16 @@
 import seoData from '@/data/seo.json'
 import profileData from '@/data/profile.json'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+// Ensure URL has protocol
+function ensureUrlProtocol(url: string): string {
+  if (!url) return 'https://yourdomain.com'
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return `https://${url}`
+}
+
+const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com')
 
 export function getSEOMetadata() {
   // Use seo.json if available, otherwise fallback to profile data
@@ -64,10 +73,14 @@ export function getStructuredData() {
     },
   }
 
+  // Ensure URL has protocol
+  const personUrl = structured.person?.url ? ensureUrlProtocol(structured.person.url) : siteUrl
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     ...structured.person,
+    url: personUrl,
   }
 }
 
