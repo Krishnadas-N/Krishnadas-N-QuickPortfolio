@@ -80,9 +80,18 @@ export async function GET(request: NextRequest) {
     const referrerCounts = new Map<string, number>()
     analytics.forEach((event) => {
       if (event.referrer) {
-        const referrer = new URL(event.referrer).hostname
-        const count = referrerCounts.get(referrer) || 0
-        referrerCounts.set(referrer, count + 1)
+        try {
+          // Ensure referrer has protocol before creating URL
+          let referrerUrl = event.referrer
+          if (!referrerUrl.startsWith('http://') && !referrerUrl.startsWith('https://')) {
+            referrerUrl = `https://${referrerUrl}`
+          }
+          const referrer = new URL(referrerUrl).hostname
+          const count = referrerCounts.get(referrer) || 0
+          referrerCounts.set(referrer, count + 1)
+        } catch {
+          // Skip invalid referrer URLs
+        }
       }
     })
     const topReferrers = Array.from(referrerCounts.entries())

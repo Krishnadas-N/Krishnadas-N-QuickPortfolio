@@ -24,22 +24,46 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
-// Ensure URL has protocol
-function ensureUrlProtocol(url: string): string {
-  if (!url) return 'https://yourdomain.com'
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url
+// Ensure URL has protocol - with validation
+function ensureUrlProtocol(url: string | undefined): string {
+  if (!url || typeof url !== 'string') return 'https://yourdomain.com'
+  const trimmed = url.trim()
+  if (!trimmed) return 'https://yourdomain.com'
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed
   }
-  return `https://${url}`
+  return `https://${trimmed}`
 }
 
-const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com')
+// Get and validate site URL
+function getSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const url = ensureUrlProtocol(envUrl)
+  // Validate URL can be constructed
+  try {
+    new URL(url)
+    return url
+  } catch {
+    return 'https://yourdomain.com'
+  }
+}
+
+const siteUrl = getSiteUrl()
 const seoMeta = getSEOMetadata()
 const ogData = getOpenGraphData()
 const twitterData = getTwitterData()
 
+// Safely create metadataBase URL
+function getMetadataBase(): URL {
+  try {
+    return new URL(siteUrl)
+  } catch {
+    return new URL('https://yourdomain.com')
+  }
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: getMetadataBase(),
   title: {
     default: seoMeta.title,
     template: `%s | ${seoMeta.author}`,

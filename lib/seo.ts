@@ -1,16 +1,31 @@
 import seoData from '@/data/seo.json'
 import profileData from '@/data/profile.json'
 
-// Ensure URL has protocol
-function ensureUrlProtocol(url: string): string {
-  if (!url) return 'https://yourdomain.com'
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url
+g// Ensure URL has protocol - with validation
+function ensureUrlProtocol(url: string | undefined): string {
+  if (!url || typeof url !== 'string') return 'https://yourdomain.com'
+  const trimmed = url.trim()
+  if (!trimmed) return 'https://yourdomain.com'
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed
   }
-  return `https://${url}`
+  return `https://${trimmed}`
 }
 
-const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com')
+// Get and validate site URL
+function getSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const url = ensureUrlProtocol(envUrl)
+  // Validate URL can be constructed
+  try {
+    new URL(url)
+    return url
+  } catch {
+    return 'https://yourdomain.com'
+  }
+}
+
+const siteUrl = getSiteUrl()
 
 export function getSEOMetadata() {
   // Use seo.json if available, otherwise fallback to profile data
@@ -39,9 +54,12 @@ export function getOpenGraphData() {
     siteName: `${profileData.name} Portfolio`,
   }
 
+  // Ensure URL has protocol
+  const ogUrl = og.url ? ensureUrlProtocol(og.url) : siteUrl
+
   return {
     ...og,
-    url: siteUrl,
+    url: ogUrl,
     locale: 'en_US',
   }
 }
@@ -76,11 +94,22 @@ export function getStructuredData() {
   // Ensure URL has protocol
   const personUrl = structured.person?.url ? ensureUrlProtocol(structured.person.url) : siteUrl
 
+  // Ensure all sameAs URLs have protocols
+  const sameAs = (structured.person?.sameAs || []).map((url: string) => {
+    if (!url) return null
+    try {
+      return ensureUrlProtocol(url)
+    } catch {
+      return null
+    }
+  }).filter(Boolean) as string[]
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     ...structured.person,
     url: personUrl,
+    sameAs: sameAs.length > 0 ? sameAs : structured.person?.sameAs || [],
   }
 }
 
