@@ -1,7 +1,7 @@
 import seoData from '@/data/seo.json'
 import profileData from '@/data/profile.json'
 
-g// Ensure URL has protocol - with validation
+// Ensure URL has protocol - with validation
 function ensureUrlProtocol(url: string | undefined): string {
   if (!url || typeof url !== 'string') return 'https://yourdomain.com'
   const trimmed = url.trim()
