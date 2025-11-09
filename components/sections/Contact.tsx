@@ -99,7 +99,7 @@ export default function Contact() {
             <span className="text-hacker-green">{'>'}</span> CONTACT.TXT
           </h2>
           <p className="text-hacker-green/70 text-center mb-12 font-mono">
-            Have a project in mind? Let's work together!
+            Have a project in mind? Let&apos;s work together!
           </p>
         </motion.div>
 
@@ -235,7 +235,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all"
-                  placeholder="What's this about?"
+                  placeholder="What&apos;s this about?"
                 />
               </div>
 
