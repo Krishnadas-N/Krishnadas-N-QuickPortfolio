@@ -96,7 +96,7 @@ export default function Contact() {
               textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
             }}
           >
-            <span className="text-hacker-green">{'>'}</span> CONTACT.TXT
+            <span className="text-hacker-green">{'>'}</span> CONTACT - Hire Full Stack Developer
           </h2>
           <p className="text-hacker-green/70 text-center mb-12 font-mono">
             Have a project in mind? Let&apos;s work together!

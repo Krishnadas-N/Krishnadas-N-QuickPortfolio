@@ -132,6 +132,7 @@ export default function Hero() {
               textShadow: '0 0 5px rgba(0,255,65,0.4), 0 0 10px rgba(0,255,65,0.3), 0 0 15px rgba(0,255,65,0.2), 0 2px 0 rgba(0,255,65,0.1)',
               letterSpacing: '0.05em',
             }}
+            title={`${profileData.name} - Software Engineer & Full Stack Developer`}
           >
             {profileData.name.split('').map((char, index) => (
               <motion.span

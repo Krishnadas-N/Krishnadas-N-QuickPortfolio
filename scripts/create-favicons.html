@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favicon Generator</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #00ff41;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .container {
+      background: rgba(0, 255, 65, 0.1);
+      border: 2px solid #00ff41;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h1 {
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+    canvas {
+      border: 2px solid #00ff41;
+      margin: 10px;
+      background: #000;
+    }
+    button {
+      background: #00ff41;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-family: monospace;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #00ffff;
+    }
+    .instructions {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      margin: 20px 0;
+      border-left: 3px solid #00ff41;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>{'>'} FAVICON GENERATOR</h1>
+    
+    <div class="instructions">
+      <h3>Instructions:</h3>
+      <ol>
+        <li>Click "Generate Favicons" button below</li>
+        <li>Right-click each canvas and "Save image as..."</li>
+        <li>Save files to your <code>public</code> folder with these names:
+          <ul>
+            <li><code>favicon-16x16.png</code></li>
+            <li><code>favicon-32x32.png</code></li>
+            <li><code>apple-touch-icon.png</code></li>
+            <li><code>favicon.ico</code> (use the 32x32 version)</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <button onclick="generateFavicons()">[GENERATE_FAVICONS]</button>
+    
+    <div id="canvases"></div>
+  </div>
+
+  <script>
+    function drawFavicon(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      
+      // Black background
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, size, size);
+      
+      // Green border
+      ctx.strokeStyle = '#00ff41';
+      ctx.lineWidth = size / 50;
+      ctx.strokeRect(size * 0.2, size * 0.2, size * 0.6, size * 0.6);
+      
+      // Letter K
+      ctx.fillStyle = '#00ff41';
+      ctx.font = `bold ${size * 0.5}px monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('K', size / 2, size / 2);
+    }
+
+    function generateFavicons() {
+      const container = document.getElementById('canvases');
+      container.innerHTML = '';
+      
+      const sizes = [
+        { name: 'favicon-16x16.png', size: 16 },
+        { name: 'favicon-32x32.png', size: 32 },
+        { name: 'apple-touch-icon.png', size: 180 },
+      ];
+      
+      sizes.forEach(({ name, size }) => {
+        const canvas = document.createElement('canvas');
+        canvas.id = name;
+        drawFavicon(canvas, size);
+        
+        const label = document.createElement('div');
+        label.textContent = `${name} (${size}x${size}) - Right click to save`;
+        label.style.marginTop = '10px';
+        label.style.marginBottom = '5px';
+        label.style.color = '#00ffff';
+        
+        container.appendChild(label);
+        container.appendChild(canvas);
+      });
+      
+      // Also create ICO (use 32x32)
+      const icoCanvas = document.createElement('canvas');
+      icoCanvas.id = 'favicon.ico';
+      drawFavicon(icoCanvas, 32);
+      
+      const icoLabel = document.createElement('div');
+      icoLabel.textContent = 'favicon.ico (32x32) - Right click to save';
+      icoLabel.style.marginTop = '10px';
+      icoLabel.style.marginBottom = '5px';
+      icoLabel.style.color = '#00ffff';
+      
+      container.appendChild(icoLabel);
+      container.appendChild(icoCanvas);
+    }
+  </script>
+</body>
+</html>
+

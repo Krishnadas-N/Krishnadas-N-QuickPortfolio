@@ -42,7 +42,7 @@ export default function Skills() {
               textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
             }}
           >
-            <span className="text-hacker-green">{'>'}</span> SKILLS.TXT
+            <span className="text-hacker-green">{'>'}</span> SKILLS - React, Python, AWS & Cloud Technologies
           </h2>
           <p className="text-hacker-green/70 text-center mb-12 font-mono">
             Technologies I work with to build amazing products

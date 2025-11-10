@@ -58,7 +58,7 @@ export default function About() {
               textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
             }}
           >
-            <span className="text-hacker-green">{'>'}</span> ABOUT.TXT
+            <span className="text-hacker-green">{'>'}</span> ABOUT - Software Engineer & Full Stack Developer
           </motion.h2>
 
           <motion.div

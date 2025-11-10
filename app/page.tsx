@@ -1,19 +1,32 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
+import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/sections/Hero'
 import MatrixBackground from '@/components/MatrixBackground'
-import About from '@/components/sections/About'
-import Skills from '@/components/sections/Skills'
-import Projects from '@/components/sections/Projects'
-import Experience from '@/components/sections/Experience'
-import Contact from '@/components/sections/Contact'
-import Footer from '@/components/sections/Footer'
-import ScrollProgress from '@/components/ScrollProgress'
-import BackToTop from '@/components/BackToTop'
-import HackerGame from '@/components/HackerGame'
 import { trackPageView } from '@/lib/analytics'
+
+// Lazy load components below the fold for better LCP
+const About = dynamic(() => import('@/components/sections/About'), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+const Skills = dynamic(() => import('@/components/sections/Skills'), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+const Projects = dynamic(() => import('@/components/sections/Projects'), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+const Experience = dynamic(() => import('@/components/sections/Experience'), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+const Contact = dynamic(() => import('@/components/sections/Contact'), {
+  loading: () => <div className="min-h-[400px]" />,
+})
+const Footer = dynamic(() => import('@/components/sections/Footer'))
+const ScrollProgress = dynamic(() => import('@/components/ScrollProgress'))
+const BackToTop = dynamic(() => import('@/components/BackToTop'))
+const HackerGame = dynamic(() => import('@/components/HackerGame'))
 
 export default function Home() {
   useEffect(() => {
@@ -25,16 +38,34 @@ export default function Home() {
     <main className="relative min-h-screen bg-black">
       <MatrixBackground />
       <Navigation />
-      <ScrollProgress />
+      <Suspense fallback={null}>
+        <ScrollProgress />
+      </Suspense>
       <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer />
-      <BackToTop />
-      <HackerGame />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <About />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <Skills />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <Projects />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <Experience />
+      </Suspense>
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <Contact />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+      <Suspense fallback={null}>
+        <BackToTop />
+      </Suspense>
+      <Suspense fallback={null}>
+        <HackerGame />
+      </Suspense>
     </main>
   )
 }

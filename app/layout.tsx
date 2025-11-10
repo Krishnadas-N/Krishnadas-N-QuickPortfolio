@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     template: `%s | ${seoMeta.author}`,
   },
   description: seoMeta.description,
-  keywords: seoMeta.keywords,
+  keywords: Array.isArray(seoMeta.keywords) ? seoMeta.keywords.join(', ') : seoMeta.keywords,
   authors: [{ name: seoMeta.author }],
   creator: seoMeta.author,
   publisher: seoMeta.author,
@@ -107,7 +107,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
@@ -123,20 +128,48 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const jsonLd = getStructuredData()
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || ''
 
   return (
     <html lang="en" className={`${inter.variable} ${rajdhani.variable} ${jetbrainsMono.variable}`}>
       <head>
+        {/* Preconnect to external domains for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        {gaId && <link rel="dns-prefetch" href="https://www.googletagmanager.com" />}
+        {gaId && <link rel="dns-prefetch" href="https://www.google-analytics.com" />}
+        
         <meta name="theme-color" content="#0b0f1a" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        
+        {/* Structured Data - Non-blocking */}
         <Script
           id="structured-data"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        
+        {/* Google Analytics - Load asynchronously */}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body className="antialiased">
         {children}

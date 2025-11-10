@@ -174,7 +174,7 @@ export default function Projects() {
               textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
             }}
           >
-            <span className="text-hacker-green">{'>'}</span> PROJECTS.TXT
+            <span className="text-hacker-green">{'>'}</span> PROJECTS - Full Stack & Serverless Development
           </h2>
           <p className="text-hacker-green/70 text-center mb-12 font-mono">
             Some of my recent work and side projects
