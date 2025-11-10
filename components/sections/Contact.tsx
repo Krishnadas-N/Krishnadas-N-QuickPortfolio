@@ -120,10 +120,19 @@ export default function Contact() {
               >
                 <span className="text-hacker-cyan">{'>'}</span> CONNECT
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4" style={{ position: 'relative', zIndex: 100 }}>
                 <a
                   href={`mailto:${profileData.email}`}
-                  className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    window.location.href = `mailto:${profileData.email}`
+                  }}
+                  className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                  style={{ 
+                    pointerEvents: 'auto',
+                    zIndex: 1000,
+                    position: 'relative'
+                  }}
                 >
                   <div className="w-12 h-12 rounded-lg bg-hacker-cyan/20 flex items-center justify-center border border-hacker-cyan/30">
                     <svg className="w-6 h-6 text-hacker-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +147,17 @@ export default function Contact() {
                     href={profileData.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      window.open(profileData.linkedin, '_blank', 'noopener,noreferrer')
+                    }}
+                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                    style={{ 
+                      pointerEvents: 'auto',
+                      zIndex: 1000,
+                      position: 'relative'
+                    }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-hacker-purple/20 flex items-center justify-center border border-hacker-purple/30">
                       <svg className="w-6 h-6 text-hacker-purple" fill="currentColor" viewBox="0 0 24 24">
@@ -154,7 +173,17 @@ export default function Contact() {
                     href={profileData.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      window.open(profileData.github, '_blank', 'noopener,noreferrer')
+                    }}
+                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                    style={{ 
+                      pointerEvents: 'auto',
+                      zIndex: 1000,
+                      position: 'relative'
+                    }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-hacker-cyan/20 flex items-center justify-center border border-hacker-cyan/30">
                       <svg className="w-6 h-6 text-hacker-cyan" fill="currentColor" viewBox="0 0 24 24">
@@ -170,11 +199,12 @@ export default function Contact() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleWhatsApp}
-                className="mt-6 w-full px-6 py-3 rounded-lg font-mono font-bold transition-all"
+                className="mt-6 w-full px-6 py-3 rounded-lg font-mono font-bold transition-all cursor-pointer relative z-20"
                 style={{
                   backgroundColor: '#00ff41',
                   color: '#000000',
                   boxShadow: '0 0 10px rgba(0, 255, 65, 0.5)',
+                  pointerEvents: 'auto',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#00ffff'
@@ -189,8 +219,8 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form */}
-          <motion.div variants={itemVariants}>
-            <form onSubmit={handleSubmit} className="glass rounded-xl p-6 space-y-6">
+          <motion.div variants={itemVariants} className="relative z-10">
+            <form onSubmit={handleSubmit} className="glass rounded-xl p-6 space-y-6 relative z-10" style={{ pointerEvents: 'auto' }}>
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold mb-2 text-hacker-green font-mono">
                   {'>'} NAME
@@ -202,7 +232,8 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all relative z-20 cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="Your name"
                 />
               </div>
@@ -218,7 +249,8 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all relative z-20 cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -234,7 +266,8 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all relative z-20 cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="What&apos;s this about?"
                 />
               </div>
@@ -250,7 +283,8 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-terminal-bg border border-hacker-green text-hacker-green font-mono focus:outline-none focus:border-hacker-cyan focus:shadow-hacker-green transition-all resize-none relative z-20 cursor-text"
+                  style={{ pointerEvents: 'auto' }}
                   placeholder="Tell me about your project..."
                 />
               </div>

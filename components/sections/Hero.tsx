@@ -262,8 +262,18 @@ export default function Hero() {
               href={profileData.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                window.open(profileData.github, '_blank', 'noopener,noreferrer')
+              }}
               whileHover={{ scale: 1.3, y: -5, filter: 'brightness(1.5)' }}
-              className="text-hacker-green hover:text-hacker-cyan transition-all"
+              className="text-hacker-green hover:text-hacker-cyan transition-all cursor-pointer relative"
+              style={{ 
+                pointerEvents: 'auto',
+                zIndex: 1000,
+                position: 'relative'
+              }}
               aria-label="GitHub"
             >
               <div className="glass p-3 rounded-lg border border-hacker-green hover:border-hacker-cyan">
@@ -278,8 +288,18 @@ export default function Hero() {
               href={profileData.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                window.open(profileData.linkedin, '_blank', 'noopener,noreferrer')
+              }}
               whileHover={{ scale: 1.3, y: -5, filter: 'brightness(1.5)' }}
-              className="text-hacker-green hover:text-hacker-cyan transition-all"
+              className="text-hacker-green hover:text-hacker-cyan transition-all cursor-pointer relative"
+              style={{ 
+                pointerEvents: 'auto',
+                zIndex: 1000,
+                position: 'relative'
+              }}
               aria-label="LinkedIn"
             >
               <div className="glass p-3 rounded-lg border border-hacker-green hover:border-hacker-cyan">
@@ -294,8 +314,18 @@ export default function Hero() {
               href={profileData.twitter}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                window.open(profileData.twitter, '_blank', 'noopener,noreferrer')
+              }}
               whileHover={{ scale: 1.3, y: -5, filter: 'brightness(1.5)' }}
-              className="text-hacker-green hover:text-hacker-cyan transition-all"
+              className="text-hacker-green hover:text-hacker-cyan transition-all cursor-pointer relative"
+              style={{ 
+                pointerEvents: 'auto',
+                zIndex: 1000,
+                position: 'relative'
+              }}
               aria-label="Twitter"
             >
               <div className="glass p-3 rounded-lg border border-hacker-green hover:border-hacker-cyan">

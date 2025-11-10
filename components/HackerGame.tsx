@@ -26,9 +26,8 @@ export default function HackerGame() {
   const spawnRef = useRef<NodeJS.Timeout | null>(null)
 
   const spawnTarget = useCallback(() => {
-    if (!gameAreaRef.current || !gameState.isPlaying) return
+    if (!gameAreaRef.current) return
 
-    const area = gameAreaRef.current
     const newTarget = {
       id: Date.now() + Math.random(),
       x: Math.random() * 80 + 10, // 10-90% to avoid edges
@@ -42,7 +41,7 @@ export default function HackerGame() {
     setTimeout(() => {
       setTargets((prev) => prev.filter((t) => t.id !== newTarget.id))
     }, 3000)
-  }, [gameState.isPlaying])
+  }, [])
 
   useEffect(() => {
     if (gameState.isPlaying && gameState.timeLeft > 0) {
@@ -59,7 +58,9 @@ export default function HackerGame() {
       // Spawn targets
       const spawnInterval = 2000 - (gameState.level - 1) * 100
       spawnRef.current = setInterval(() => {
-        spawnTarget()
+        if (gameAreaRef.current) {
+          spawnTarget()
+        }
       }, Math.max(500, spawnInterval))
 
       return () => {
@@ -80,7 +81,8 @@ export default function HackerGame() {
     }
   }, [gameState.isPlaying, gameState.timeLeft, gameState.level, spawnTarget])
 
-  const handleTargetClick = (value: number, id: number) => {
+  const handleTargetClick = (value: number, id: number, e: React.MouseEvent) => {
+    e.stopPropagation()
     setGameState((prev) => ({
       ...prev,
       score: prev.score + value * prev.level,
@@ -97,12 +99,12 @@ export default function HackerGame() {
       isGameOver: false,
     })
     setTargets([])
-    // Spawn first target immediately
+    // Spawn first target immediately after state updates
     setTimeout(() => {
       if (gameAreaRef.current) {
         spawnTarget()
       }
-    }, 500)
+    }, 100)
   }
 
   const resetGame = () => {
@@ -142,15 +144,31 @@ export default function HackerGame() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             className="fixed bottom-24 right-2 sm:right-4 md:right-8 z-40 glass terminal-box rounded-lg p-3 sm:p-4 w-[calc(100vw-1rem)] sm:w-80 md:w-96 max-w-[calc(100vw-1rem)] sm:max-w-none max-h-[500px] overflow-y-auto"
+            style={{ pointerEvents: 'auto' }}
           >
-            <div className="mb-4">
-              <h3 className="text-white font-mono text-base sm:text-lg mb-2"
-                style={{
-                  textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
-                }}
-              >
-                {'>'} HACKER_GAME.EXE
-              </h3>
+            <div className="mb-4 relative">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-white font-mono text-base sm:text-lg"
+                  style={{
+                    textShadow: '0 0 10px rgba(0,255,65,0.5), 0 0 20px rgba(0,255,65,0.3)',
+                  }}
+                >
+                  {'>'} HACKER_GAME.EXE
+                </h3>
+                <button
+                  onClick={() => {
+                    setShowGame(false)
+                    resetGame()
+                  }}
+                  className="text-hacker-green hover:text-hacker-red transition-colors font-mono text-sm cursor-pointer relative z-50"
+                  style={{ pointerEvents: 'auto' }}
+                  aria-label="Close game"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
               <p className="text-hacker-green/70 text-xs font-mono mb-4">
                 Click the green targets before they disappear!
               </p>
@@ -158,7 +176,8 @@ export default function HackerGame() {
               {!gameState.isPlaying && !gameState.isGameOver && (
                 <button
                   onClick={startGame}
-                  className="w-full px-4 py-2 bg-hacker-green text-black font-mono font-bold rounded hover:bg-hacker-cyan transition-colors shadow-hacker-green"
+                  className="w-full px-4 py-2 bg-hacker-green text-black font-mono font-bold rounded hover:bg-hacker-cyan transition-colors shadow-hacker-green cursor-pointer relative z-20"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   [START]
                 </button>
@@ -187,7 +206,8 @@ export default function HackerGame() {
                   </p>
                   <button
                     onClick={resetGame}
-                    className="px-4 py-2 bg-hacker-cyan text-black font-mono font-bold rounded hover:bg-hacker-purple transition-colors"
+                    className="px-4 py-2 bg-hacker-cyan text-black font-mono font-bold rounded hover:bg-hacker-purple transition-colors cursor-pointer relative z-20"
+                    style={{ pointerEvents: 'auto' }}
                   >
                     [PLAY AGAIN]
                   </button>
@@ -198,11 +218,11 @@ export default function HackerGame() {
                 <div
                   ref={gameAreaRef}
                   className="relative w-full h-64 bg-terminal-bg border-2 border-hacker-green rounded overflow-hidden"
-                  style={{ minHeight: '256px' }}
+                  style={{ minHeight: '256px', pointerEvents: 'auto' }}
                 >
-                  {targets.length === 0 && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <p className="text-hacker-green/50 font-mono text-sm">Waiting for targets...</p>
+                  {targets.length === 0 && gameState.timeLeft > 0 && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                      <p className="text-hacker-green/50 font-mono text-sm">Loading targets...</p>
                     </div>
                   )}
                   {targets.map((target) => (
@@ -211,12 +231,13 @@ export default function HackerGame() {
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
-                      onClick={() => handleTargetClick(target.value, target.id)}
-                      className="absolute w-12 h-12 bg-hacker-green rounded-full border-2 border-hacker-cyan flex items-center justify-center text-black font-mono font-bold text-sm hover:scale-110 transition-transform cursor-pointer shadow-hacker-green z-10"
+                      onClick={(e) => handleTargetClick(target.value, target.id, e)}
+                      className="absolute w-12 h-12 bg-hacker-green rounded-full border-2 border-hacker-cyan flex items-center justify-center text-black font-mono font-bold text-sm hover:scale-110 transition-transform cursor-pointer shadow-hacker-green z-50"
                       style={{
                         left: `${target.x}%`,
                         top: `${target.y}%`,
                         transform: 'translate(-50%, -50%)',
+                        pointerEvents: 'auto',
                       }}
                       whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}

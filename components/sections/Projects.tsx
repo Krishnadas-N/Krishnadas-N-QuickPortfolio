@@ -28,7 +28,8 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
-              className="glass rounded-2xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              className="glass rounded-2xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative z-50"
+              style={{ pointerEvents: 'auto' }}
             >
               <button
                 onClick={onClose}
@@ -62,17 +63,25 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 ))}
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 relative" style={{ zIndex: 100 }}>
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-lg glass border-2 font-mono font-bold transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      window.open(project.github, '_blank', 'noopener,noreferrer')
+                    }}
+                    className="px-6 py-3 rounded-lg glass border-2 font-mono font-bold transition-all cursor-pointer relative"
                     style={{
                       borderColor: '#00ffff',
                       color: '#00ffff',
                       boxShadow: '0 0 10px rgba(0, 255, 255, 0.3)',
+                      pointerEvents: 'auto',
+                      zIndex: 1000,
+                      position: 'relative'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = '#00ffff'
@@ -91,11 +100,19 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-lg font-mono font-bold transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      window.open(project.live, '_blank', 'noopener,noreferrer')
+                    }}
+                    className="px-6 py-3 rounded-lg font-mono font-bold transition-all cursor-pointer relative"
                     style={{
                       backgroundColor: '#00ff41',
                       color: '#000000',
                       boxShadow: '0 0 10px rgba(0, 255, 65, 0.5)',
+                      pointerEvents: 'auto',
+                      zIndex: 1000,
+                      position: 'relative'
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = '#00ffff'
@@ -176,7 +193,7 @@ export default function Projects() {
               key={project.id}
               variants={itemVariants}
               whileHover={{ y: -10 }}
-              className="glass rounded-2xl overflow-hidden group cursor-pointer"
+              className="glass rounded-2xl overflow-hidden group cursor-pointer relative"
               onClick={() => setSelectedProject(project.id)}
             >
               <div className="relative h-48 bg-gradient-to-br from-hacker-cyan/20 to-hacker-purple/20 flex items-center justify-center border-b border-hacker-green/30">
@@ -213,14 +230,23 @@ export default function Projects() {
                     </span>
                   )}
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-3 relative" style={{ zIndex: 100 }}>
                   {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-hacker-cyan hover:text-hacker-purple transition-colors text-sm font-mono"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        window.open(project.github, '_blank', 'noopener,noreferrer')
+                      }}
+                      className="text-hacker-cyan hover:text-hacker-purple transition-colors text-sm font-mono cursor-pointer relative"
+                      style={{ 
+                        pointerEvents: 'auto',
+                        zIndex: 1000,
+                        position: 'relative'
+                      }}
                     >
                       GitHub →
                     </a>
@@ -230,8 +256,17 @@ export default function Projects() {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-hacker-purple hover:text-hacker-cyan transition-colors text-sm font-mono"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        window.open(project.live, '_blank', 'noopener,noreferrer')
+                      }}
+                      className="text-hacker-purple hover:text-hacker-cyan transition-colors text-sm font-mono cursor-pointer relative"
+                      style={{ 
+                        pointerEvents: 'auto',
+                        zIndex: 1000,
+                        position: 'relative'
+                      }}
                     >
                       Live Demo →
                     </a>

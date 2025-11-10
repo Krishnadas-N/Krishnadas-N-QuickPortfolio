@@ -19,7 +19,17 @@ export default function Footer() {
                 href={profileData.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                  window.open(profileData.github, '_blank', 'noopener,noreferrer')
+                }}
+                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
+                style={{ 
+                  pointerEvents: 'auto',
+                  zIndex: 1000,
+                  position: 'relative'
+                }}
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -32,7 +42,17 @@ export default function Footer() {
                 href={profileData.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                  window.open(profileData.linkedin, '_blank', 'noopener,noreferrer')
+                }}
+                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
+                style={{ 
+                  pointerEvents: 'auto',
+                  zIndex: 1000,
+                  position: 'relative'
+                }}
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -45,7 +65,17 @@ export default function Footer() {
                 href={profileData.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
+                  window.open(profileData.twitter, '_blank', 'noopener,noreferrer')
+                }}
+                className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
+                style={{ 
+                  pointerEvents: 'auto',
+                  zIndex: 1000,
+                  position: 'relative'
+                }}
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

@@ -48,10 +48,16 @@ export default function Navigation() {
               e.preventDefault()
               handleNavClick('#hero')
             }}
-            className="text-xl font-mono font-bold neon-text"
+            className="text-xl font-mono font-bold neon-text cursor-pointer relative z-10"
+            style={{ pointerEvents: 'auto' }}
             whileHover={{ scale: 1.05, filter: 'brightness(1.5)' }}
           >
-            {'>'} PORTFOLIO.EXE
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-5 h-5 text-hacker-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              {'>'} PORTFOLIO.EXE
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -64,7 +70,8 @@ export default function Navigation() {
                   e.preventDefault()
                   handleNavClick(item.href)
                 }}
-                className="text-hacker-green hover:text-hacker-cyan transition-colors relative group font-mono text-sm"
+                className="text-hacker-green hover:text-hacker-cyan transition-colors relative group font-mono text-sm cursor-pointer relative z-10"
+                style={{ pointerEvents: 'auto' }}
                 whileHover={{ y: -2, filter: 'brightness(1.5)' }}
               >
                 {'['}{item.name}{']'}
@@ -108,7 +115,8 @@ export default function Navigation() {
                     e.preventDefault()
                     handleNavClick(item.href)
                   }}
-                  className="block px-4 py-2 text-hacker-green hover:text-hacker-cyan hover:bg-hacker-green/10 rounded-lg transition-colors font-mono"
+                  className="block px-4 py-2 text-hacker-green hover:text-hacker-cyan hover:bg-hacker-green/10 rounded-lg transition-colors font-mono cursor-pointer relative z-10"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   {item.name}
                 </a>

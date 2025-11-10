@@ -321,11 +321,29 @@ button {
   align-items: center;
   justify-content: center;
   outline: none;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
 }
 
 button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* Ensure all links are clickable */
+a {
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+
+/* Ensure inputs are clickable */
+input, textarea {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
 }
 
 /* Ensure buttons are visible - only apply if no background is set */
