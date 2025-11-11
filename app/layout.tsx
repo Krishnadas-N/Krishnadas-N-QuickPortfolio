@@ -26,9 +26,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 // Ensure URL has protocol - with validation
 function ensureUrlProtocol(url: string | undefined): string {
-  if (!url || typeof url !== 'string') return 'https://yourdomain.com'
+  if (!url || typeof url !== 'string') return 'https://krishnadas.info'
   const trimmed = url.trim()
-  if (!trimmed) return 'https://yourdomain.com'
+  if (!trimmed) return 'https://krishnadas.info'
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed
   }
@@ -44,7 +44,7 @@ function getSiteUrl(): string {
     new URL(url)
     return url
   } catch {
-    return 'https://yourdomain.com'
+    return 'https://krishnadas.info'
   }
 }
 
@@ -58,7 +58,7 @@ function getMetadataBase(): URL {
   try {
     return new URL(siteUrl)
   } catch {
-    return new URL('https://yourdomain.com')
+    return new URL('https://krishnadas.info')
   }
 }
 

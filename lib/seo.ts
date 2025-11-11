@@ -3,9 +3,9 @@ import profileData from '@/data/profile.json'
 
 // Ensure URL has protocol - with validation
 function ensureUrlProtocol(url: string | undefined): string {
-  if (!url || typeof url !== 'string') return 'https://yourdomain.com'
+  if (!url || typeof url !== 'string') return 'https://krishnadas.info'
   const trimmed = url.trim()
-  if (!trimmed) return 'https://yourdomain.com'
+  if (!trimmed) return 'https://krishnadas.info'
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed
   }
@@ -21,7 +21,7 @@ function getSiteUrl(): string {
     new URL(url)
     return url
   } catch {
-    return 'https://yourdomain.com'
+    return 'https://krishnadas.info'
   }
 }
 
@@ -104,12 +104,24 @@ export function getStructuredData() {
     }
   }).filter(Boolean) as string[]
 
-  return {
+  // Build the Person schema object
+  const personSchema: any = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    ...structured.person,
+    name: structured.person?.name || profileData.name,
+    alternateName: structured.person?.alternateName,
+    jobTitle: structured.person?.jobTitle || profileData.role,
+    description: structured.person?.description || profileData.summary,
     url: personUrl,
     sameAs: sameAs.length > 0 ? sameAs : structured.person?.sameAs || [],
+    email: structured.person?.email || profileData.email,
   }
+
+  // Add worksFor if present
+  if (structured.person?.worksFor) {
+    personSchema.worksFor = structured.person.worksFor
+  }
+
+  return personSchema
 }
 

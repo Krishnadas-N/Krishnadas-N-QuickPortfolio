@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import projectsData from '@/data/projects.json'
-import Image from 'next/image'
 
 interface ProjectModalProps {
   project: typeof projectsData.projects[0]

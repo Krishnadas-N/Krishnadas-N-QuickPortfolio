@@ -1,9 +1,13 @@
 {
   "meta": {
-    "title": "Krishnadas N - Software Engineer & Full Stack Developer",
-    "description": "Software engineer at RCKR Software specializing in full stack and serverless development. Expert in React, Python, AWS Lambda, and PostgreSQL — building scalable, cloud-native applications.",
+    "title": "Krishnadas - Software Engineer & Full Stack Developer | Portfolio",
+    "description": "Krishnadas is a software engineer at RCKR Software specializing in full stack and serverless development. Expert in React, Angular, Javascript, Typescript, Python, AWS Lambda, and PostgreSQL — building scalable, cloud-native applications.",
     "keywords": [
+      "Krishnadas",
+      "Krishnadas software engineer",
       "Krishnadas N",
+      "Krishnadas developer",
+      "Krishnadas portfolio",
       "software engineer",
       "full stack developer",
       "freelancer",
@@ -34,30 +38,36 @@
     "language": "en"
   },
   "openGraph": {
-    "title": "Krishnadas N - Full Stack Developer & Cloud Engineer",
-    "description": "Full stack and serverless developer crafting performant web and cloud solutions. Explore my projects, experience, and achievements.",
+    "title": "Krishnadas - Software Engineer & Full Stack Developer",
+    "description": "Krishnadas is a full stack and serverless developer crafting performant web and cloud solutions. Explore my projects, experience, and achievements.",
     "type": "website",
-    "image": "/og-image.jpg",
-    "siteName": "Krishnadas N Portfolio"
+    "url": "https://krishnadas.info",
+    "image": "https://krishnadas.info/opengraph-image",
+    "siteName": "Krishnadas Portfolio"
   },
   "twitter": {
     "card": "summary_large_image",
-    "title": "Krishnadas N - Software Engineer",
+    "title": "Krishnadas - Software Engineer",
     "description": "Full stack & serverless developer building scalable, performant web apps.",
-    "image": "/og-image.jpg"
+    "image": "https://krishnadas.info/opengraph-image"
   },
   "structuredData": {
     "person": {
-      "name": "Krishnadas N",
+      "name": "Krishnadas",
+      "alternateName": "Krishnadas N",
       "jobTitle": "Software Engineer",
-      "description": "Full stack developer and cloud engineer specializing in React, Python, and AWS Serverless.",
+      "description": "Krishnadas is a full stack developer and cloud engineer specializing in React, Python, and AWS Serverless. Software engineer at RCKR Software.",
       "url": "https://krishnadas.info",
       "sameAs": [
         "https://linkedin.com/in/krishnadas-n-942441230/",
         "https://github.com/Krishnadas-N",
         "https://twitter.com/krishnadas"
       ],
-      "email": "nkrishnadas.connect@gmail.com"
+      "email": "nkrishnadas.connect@gmail.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "RCKR Software Pvt Ltd"
+      }
     }
   },
   "pages": [
