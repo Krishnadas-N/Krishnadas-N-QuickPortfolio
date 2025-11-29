@@ -78,7 +78,7 @@ export default async function Image() {
             <div style={{ fontSize: 40, color: '#00ffff' }}>
               {profileData.role}
             </div>
-            <div style={{ fontSize: 40, color: '#00ff41' }}>//</div>
+            <div style={{ fontSize: 40, color: '#00ff41' }}>/ /</div>
             <div style={{ fontSize: 40, color: '#ff00ff' }}>
               Full Stack Dev
             </div>
