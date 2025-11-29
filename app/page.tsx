@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, lazy, Suspense } from 'react'
+import { useEffect, lazy, Suspense, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/sections/Hero'
@@ -39,45 +39,49 @@ const HackerGame = dynamic(() => import('@/components/HackerGame'))
 const InitialLoader = dynamic(() => import('@/components/InitialLoader'), { ssr: false })
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
   return (
     <main className="relative min-h-screen bg-black">
-      <InitialLoader />
+      <InitialLoader onComplete={() => setIsLoaded(true)} />
       <MatrixBackground />
-      <Navigation />
-      <Suspense fallback={null}>
-        <ScrollProgress />
-      </Suspense>
-      <Hero />
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <About />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Skills />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Services />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Projects />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Experience />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Testimonials />
-      </Suspense>
-      <Suspense fallback={<div className="min-h-[400px]" />}>
-        <Contact />
-      </Suspense>
-      <Suspense fallback={null}>
-        <Footer />
-      </Suspense>
-      <Suspense fallback={null}>
-        <BackToTop />
-      </Suspense>
-      <Suspense fallback={null}>
-        <HackerGame />
-      </Suspense>
+      <div className={`transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <Navigation />
+        <Suspense fallback={null}>
+          <ScrollProgress />
+        </Suspense>
+        <Hero />
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Skills />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Services />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Testimonials />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Contact />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+        <Suspense fallback={null}>
+          <BackToTop />
+        </Suspense>
+        <Suspense fallback={null}>
+          <HackerGame />
+        </Suspense>
+      </div>
     </main>
   )
 }

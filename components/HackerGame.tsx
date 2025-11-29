@@ -61,7 +61,7 @@ export default function HackerGame() {
         clearInterval(timerRef.current)
       }
     }
-  }, [gameState.isPlaying])
+  }, [gameState.isPlaying, gameState.timeLeft])
 
   // Target Spawning Effect
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function HackerGame() {
         clearInterval(spawnRef.current)
       }
     }
-  }, [gameState.isPlaying, gameState.isGameOver, gameState.level, spawnTarget])
+  }, [gameState.isPlaying, gameState.isGameOver, gameState.level, spawnTarget, targets.length])
 
   const handleTargetClick = (value: number, id: number, e: React.MouseEvent) => {
     e.stopPropagation()

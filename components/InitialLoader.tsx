@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function InitialLoader() {
+export default function InitialLoader({ onComplete }: { onComplete?: () => void }) {
   const [isLoading, setIsLoading] = useState(true)
   const [progress, setProgress] = useState(0)
   const [loadingText, setLoadingText] = useState('INITIALIZING_SYSTEM')
@@ -30,17 +30,20 @@ export default function InitialLoader() {
         currentTextIndex++
         setLoadingText(texts[currentTextIndex])
       }
-    }, 400)
+    }, 150) // Speed up text updates
 
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval)
           clearInterval(textInterval)
-          setTimeout(() => setIsLoading(false), 500)
+          setTimeout(() => {
+            setIsLoading(false)
+            if (onComplete) onComplete()
+          }, 200) // Reduce exit delay
           return 100
         }
-        return prev + Math.random() * 5
+        return prev + Math.random() * 15 + 5 // Speed up progress (was * 5)
       })
     }, 100)
 
@@ -48,7 +51,7 @@ export default function InitialLoader() {
       clearInterval(textInterval)
       clearInterval(progressInterval)
     }
-  }, [])
+  }, [onComplete])
 
   return (
     <AnimatePresence>
