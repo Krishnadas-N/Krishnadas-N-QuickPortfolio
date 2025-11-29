@@ -56,7 +56,7 @@ body::before {
       rgba(0, 255, 65, 0.03) 3px
     );
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 /* Scanline effect */
@@ -73,7 +73,7 @@ body::after {
   );
   background-size: 100% 4px;
   pointer-events: none;
-  z-index: 1;
+  z-index: 9999;
   animation: scanline 8s linear infinite;
 }
 
@@ -322,7 +322,7 @@ button {
   justify-content: center;
   outline: none;
   position: relative;
-  z-index: 10;
+  z-index: 20;
   pointer-events: auto !important;
 }
 
@@ -335,14 +335,14 @@ button:disabled {
 a {
   cursor: pointer;
   position: relative;
-  z-index: 10;
+  z-index: 20;
   pointer-events: auto !important;
 }
 
 /* Ensure inputs are clickable */
 input, textarea {
   position: relative;
-  z-index: 10;
+  z-index: 20;
   pointer-events: auto !important;
 }
 

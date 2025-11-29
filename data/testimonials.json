@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Client",
+    "role": "Freelance Client",
+    "content": "Krishnadas is an exceptional engineer who consistently delivers high-quality code. His ability to solve complex problems and architect scalable solutions is impressive."
+  },
+  {
+    "id": 2,
+    "name": "Client",
+    "role": "Freelance Client",
+    "content": "Working with Krishnadas was a pleasure. He understood our requirements perfectly and delivered a robust solution ahead of schedule. Highly recommended!"
+  },
+  {
+    "id": 3,
+    "name": "Senior Developer",
+    "role": "Colleague",
+    "content": "A dedicated developer with a deep understanding of modern web technologies. He is always eager to learn and contributes significantly to the team's success."
+  }
+]

@@ -12,7 +12,7 @@ const inter = Inter({
 })
 
 const rajdhani = Rajdhani({ 
-  weight: ['400', '500', '600', '700'],
+  weight: ['500', '600', '700'], // Reduced weights
   subsets: ['latin'],
   variable: '--font-rajdhani',
   display: 'swap',

@@ -43,9 +43,9 @@ export default function HackerGame() {
     }, 3000)
   }, [])
 
+  // Game Timer Effect
   useEffect(() => {
     if (gameState.isPlaying && gameState.timeLeft > 0) {
-      // Timer countdown
       timerRef.current = setInterval(() => {
         setGameState((prev) => {
           if (prev.timeLeft <= 1) {
@@ -54,32 +54,38 @@ export default function HackerGame() {
           return { ...prev, timeLeft: prev.timeLeft - 1 }
         })
       }, 1000)
+    }
 
-      // Spawn targets
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [gameState.isPlaying])
+
+  // Target Spawning Effect
+  useEffect(() => {
+    if (gameState.isPlaying && !gameState.isGameOver) {
       const spawnInterval = 2000 - (gameState.level - 1) * 100
+      
+      // Initial spawn
+      if (targets.length === 0 && gameAreaRef.current) {
+        spawnTarget()
+      }
+
       spawnRef.current = setInterval(() => {
         if (gameAreaRef.current) {
           spawnTarget()
         }
       }, Math.max(500, spawnInterval))
+    }
 
-      return () => {
-        if (timerRef.current) {
-          clearInterval(timerRef.current)
-        }
-        if (spawnRef.current) {
-          clearInterval(spawnRef.current)
-        }
-      }
-    } else {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-      }
+    return () => {
       if (spawnRef.current) {
         clearInterval(spawnRef.current)
       }
     }
-  }, [gameState.isPlaying, gameState.timeLeft, gameState.level, spawnTarget])
+  }, [gameState.isPlaying, gameState.isGameOver, gameState.level, spawnTarget])
 
   const handleTargetClick = (value: number, id: number, e: React.MouseEvent) => {
     e.stopPropagation()
@@ -129,7 +135,8 @@ export default function HackerGame() {
       {/* Game Toggle Button */}
       <motion.button
         onClick={() => setShowGame(!showGame)}
-        className="fixed bottom-20 right-2 sm:right-4 md:right-8 z-40 glass border-2 border-hacker-green px-3 sm:px-4 py-2 rounded-lg text-hacker-green font-mono text-xs sm:text-sm hover:bg-hacker-green hover:text-black transition-all shadow-hacker-green"
+        className="fixed bottom-24 right-4 md:right-8 z-50 glass border-2 border-hacker-green px-3 sm:px-4 py-2 rounded-lg text-hacker-green font-mono text-xs sm:text-sm hover:bg-hacker-green hover:text-black transition-all shadow-hacker-green"
+        style={{ pointerEvents: 'auto' }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Toggle game"
@@ -143,7 +150,7 @@ export default function HackerGame() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-24 right-2 sm:right-4 md:right-8 z-40 glass terminal-box rounded-lg p-3 sm:p-4 w-[calc(100vw-1rem)] sm:w-80 md:w-96 max-w-[calc(100vw-1rem)] sm:max-w-none max-h-[500px] overflow-y-auto"
+            className="fixed bottom-36 right-4 md:right-8 z-50 glass terminal-box rounded-lg p-3 sm:p-4 w-[calc(100vw-2rem)] sm:w-80 md:w-96 max-w-[calc(100vw-2rem)] sm:max-w-none max-h-[500px] overflow-y-auto"
             style={{ pointerEvents: 'auto' }}
           >
             <div className="mb-4 relative">
@@ -232,6 +239,7 @@ export default function HackerGame() {
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
                       onClick={(e) => handleTargetClick(target.value, target.id, e)}
+                      onMouseDown={(e) => e.stopPropagation()} // Stop event propagation for clicks
                       className="absolute w-12 h-12 bg-hacker-green rounded-full border-2 border-hacker-cyan flex items-center justify-center text-black font-mono font-bold text-sm hover:scale-110 transition-transform cursor-pointer shadow-hacker-green z-50"
                       style={{
                         left: `${target.x}%`,

@@ -122,6 +122,19 @@ export function getStructuredData() {
     personSchema.worksFor = structured.person.worksFor
   }
 
-  return personSchema
+  // WebSite Schema
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: profileData.name,
+    url: siteUrl,
+    description: profileData.summary,
+    author: {
+      '@type': 'Person',
+      name: profileData.name,
+    },
+  }
+
+  return [personSchema, websiteSchema]
 }
 

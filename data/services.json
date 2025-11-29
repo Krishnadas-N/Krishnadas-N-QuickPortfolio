@@ -1,0 +1,26 @@
+[
+  {
+    "id": "web-dev",
+    "title": "Full Stack Web Development",
+    "description": "Building responsive, high-performance web applications using React, Next.js, and Node.js. I create seamless user experiences from concept to deployment.",
+    "icon": "code"
+  },
+  {
+    "id": "cloud-arch",
+    "title": "Cloud Architecture & Serverless",
+    "description": "Designing scalable, cost-effective cloud infrastructure on AWS. Expertise in Lambda, API Gateway, DynamoDB, and Event-Driven Architectures.",
+    "icon": "cloud"
+  },
+  {
+    "id": "api-dev",
+    "title": "API Development & Integration",
+    "description": "Developing robust RESTful and GraphQL APIs using Python (FastAPI/Django) and Node.js. Secure, documented, and optimized for performance.",
+    "icon": "server"
+  },
+  {
+    "id": "mobile-dev",
+    "title": "Mobile App Development",
+    "description": "Building native and cross-platform mobile applications using React Native and Flutter. I create performant, user-friendly mobile experiences.",
+    "icon": "mobile"
+  }
+]

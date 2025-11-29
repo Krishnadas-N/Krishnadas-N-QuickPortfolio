@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { useState, FormEvent } from 'react'
 import { toast } from 'react-hot-toast'
 import profileData from '@/data/profile.json'
-import { trackEvent } from '@/lib/analytics'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -33,14 +32,11 @@ export default function Contact() {
       if (response.ok) {
         toast.success('Message sent successfully! I\'ll get back to you soon.')
         setFormData({ name: '', email: '', subject: '', message: '' })
-        trackEvent('contact_form_submitted', { success: true })
       } else {
         toast.error(data.error || 'Failed to send message. Please try again.')
-        trackEvent('contact_form_submitted', { success: false, error: data.error })
       }
     } catch (error) {
       toast.error('Something went wrong. Please try again later.')
-      trackEvent('contact_form_submitted', { success: false, error: 'network_error' })
     } finally {
       setIsSubmitting(false)
     }
@@ -54,7 +50,6 @@ export default function Contact() {
   }
 
   const handleWhatsApp = () => {
-    trackEvent('whatsapp_clicked')
     const message = encodeURIComponent(
       `Hi ${profileData.name}, I'm interested in working with you!`
     )
@@ -111,7 +106,7 @@ export default function Contact() {
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
         >
           {/* Contact Info */}
-          <motion.div variants={itemVariants} className="space-y-6">
+          <motion.div variants={itemVariants} className="space-y-6" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 20 }}>
             <div className="glass rounded-xl p-6">
               <h3 className="text-2xl font-display font-semibold mb-6 text-white font-mono"
                 style={{
@@ -120,18 +115,19 @@ export default function Contact() {
               >
                 <span className="text-hacker-cyan">{'>'}</span> CONNECT
               </h3>
-              <div className="space-y-4" style={{ position: 'relative', zIndex: 100 }}>
+              <div className="space-y-4" style={{ position: 'relative', zIndex: 30 }}>
                 <a
                   href={`mailto:${profileData.email}`}
                   onClick={(e) => {
                     e.stopPropagation()
                     window.location.href = `mailto:${profileData.email}`
                   }}
-                  className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                  className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative group"
                   style={{ 
                     pointerEvents: 'auto',
-                    zIndex: 1000,
-                    position: 'relative'
+                    zIndex: 100,
+                    position: 'relative',
+                    display: 'flex'
                   }}
                 >
                   <div className="w-12 h-12 rounded-lg bg-hacker-cyan/20 flex items-center justify-center border border-hacker-cyan/30">
@@ -152,11 +148,12 @@ export default function Contact() {
                       e.preventDefault()
                       window.open(profileData.linkedin, '_blank', 'noopener,noreferrer')
                     }}
-                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative group"
                     style={{ 
                       pointerEvents: 'auto',
-                      zIndex: 1000,
-                      position: 'relative'
+                      zIndex: 100,
+                      position: 'relative',
+                      display: 'flex'
                     }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-hacker-purple/20 flex items-center justify-center border border-hacker-purple/30">
@@ -178,11 +175,12 @@ export default function Contact() {
                       e.preventDefault()
                       window.open(profileData.github, '_blank', 'noopener,noreferrer')
                     }}
-                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative"
+                    className="flex items-center gap-4 text-hacker-green/80 hover:text-hacker-cyan transition-colors font-mono cursor-pointer relative group"
                     style={{ 
                       pointerEvents: 'auto',
-                      zIndex: 1000,
-                      position: 'relative'
+                      zIndex: 100,
+                      position: 'relative',
+                      display: 'flex'
                     }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-hacker-cyan/20 flex items-center justify-center border border-hacker-cyan/30">

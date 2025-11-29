@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import profileData from '@/data/profile.json'
-import { trackEvent } from '@/lib/analytics'
 import MatrixBackground from '@/components/MatrixBackground'
 
 export default function Hero() {
@@ -68,7 +67,6 @@ export default function Hero() {
   }
 
   const handleHireMe = () => {
-    trackEvent('hire_me_clicked')
     const message = encodeURIComponent(
       `Hi ${profileData.name}, I'm interested in working with you!`
     )
@@ -76,7 +74,6 @@ export default function Hero() {
   }
 
   const handleDownloadResume = () => {
-    trackEvent('resume_downloaded')
     window.open(profileData.resume, '_blank')
   }
 
@@ -185,79 +182,85 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Action Buttons - Terminal Style */}
-        <motion.div
-          className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-12 px-4"
-          variants={itemVariants}
-        >
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px #00ff41' }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleHireMe}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-mono font-bold text-sm sm:text-lg transition-all duration-300 relative overflow-hidden group"
-            style={{
-              backgroundColor: '#00ff41',
-              color: '#000000',
-              boxShadow: '0 0 20px rgba(0, 255, 65, 0.5)',
-            }}
+          {/* Action Buttons - Terminal Style */}
+          <motion.div
+            className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center mb-12 px-4 relative z-20"
+            variants={itemVariants}
           >
-            <span className="relative z-10">[HIRE_ME]</span>
-            <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
-              style={{ backgroundColor: '#00ffff' }}
-            />
-          </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px #00ff41' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleHireMe}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-mono font-bold text-sm sm:text-lg transition-all duration-300 relative overflow-hidden group cursor-pointer"
+              style={{
+                backgroundColor: '#00ff41',
+                color: '#000000',
+                boxShadow: '0 0 20px rgba(0, 255, 65, 0.5)',
+                pointerEvents: 'auto'
+              }}
+              aria-label="Hire Me"
+            >
+              <span className="relative z-10">[HIRE_ME]</span>
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                style={{ backgroundColor: '#00ffff' }}
+              />
+            </motion.button>
 
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px #00ffff' }}
-            whileTap={{ scale: 0.95 }}
-            onClick={handleDownloadResume}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg glass border-2 font-mono font-bold text-sm sm:text-lg transition-all duration-300"
-            style={{
-              borderColor: '#00ffff',
-              color: '#00ffff',
-              boxShadow: '0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#00ffff'
-              e.currentTarget.style.color = '#000000'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.color = '#00ffff'
-            }}
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px #00ffff' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleDownloadResume}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg glass border-2 font-mono font-bold text-sm sm:text-lg transition-all duration-300 cursor-pointer"
+              style={{
+                borderColor: '#00ffff',
+                color: '#00ffff',
+                boxShadow: '0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1)',
+                pointerEvents: 'auto'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#00ffff'
+                e.currentTarget.style.color = '#000000'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent'
+                e.currentTarget.style.color = '#00ffff'
+              }}
+              aria-label="Download Resume"
+            >
+              [DOWNLOAD_RESUME]
+            </motion.button>
+
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.05, boxShadow: '0 0 30px #ff00ff' }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg glass border-2 font-mono font-bold text-sm sm:text-lg transition-all duration-300 text-center cursor-pointer"
+              style={{
+                borderColor: '#ff00ff',
+                color: '#ff00ff',
+                boxShadow: '0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 10px rgba(255, 0, 255, 0.1)',
+                pointerEvents: 'auto'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#ff00ff'
+                e.currentTarget.style.color = '#ffffff'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent'
+                e.currentTarget.style.color = '#ff00ff'
+              }}
+              aria-label="View Projects"
+            >
+              [VIEW_PROJECTS]
+            </motion.a>
+          </motion.div>
+
+          {/* Social Links - Terminal Style */}
+          <motion.div
+            className="flex gap-6 justify-center mb-12 relative z-20"
+            variants={itemVariants}
           >
-            [DOWNLOAD_RESUME]
-          </motion.button>
-
-          <motion.a
-            href="#projects"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px #ff00ff' }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg glass border-2 font-mono font-bold text-sm sm:text-lg transition-all duration-300 text-center"
-            style={{
-              borderColor: '#ff00ff',
-              color: '#ff00ff',
-              boxShadow: '0 0 10px rgba(255, 0, 255, 0.3), inset 0 0 10px rgba(255, 0, 255, 0.1)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#ff00ff'
-              e.currentTarget.style.color = '#ffffff'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent'
-              e.currentTarget.style.color = '#ff00ff'
-            }}
-          >
-            [VIEW_PROJECTS]
-          </motion.a>
-        </motion.div>
-
-        {/* Social Links - Terminal Style */}
-        <motion.div
-          className="flex gap-6 justify-center mb-12"
-          variants={itemVariants}
-        >
           {profileData.github && (
             <motion.a
               href={profileData.github}

@@ -12,7 +12,10 @@ function ensureUrlProtocol(url: string): string {
 const siteUrl = ensureUrlProtocol(process.env.NEXT_PUBLIC_SITE_URL || 'https://krishnadas.info')
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Single-page site - only include root path (no fragment URLs)
+  // Add main sections as separate URLs if they were separate pages,
+  // but since it's a single page app with anchors, we typically index just the root.
+  // However, if we want to hint importance, we can add them, but canonical will likely resolve to root.
+  // For a single page portfolio, the root is sufficient.
   return [
     {
       url: siteUrl,

@@ -194,6 +194,7 @@ export default function Projects() {
               whileHover={{ y: -10 }}
               className="glass rounded-2xl overflow-hidden group cursor-pointer relative"
               onClick={() => setSelectedProject(project.id)}
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 20 }}
             >
               <div className="relative h-48 bg-gradient-to-br from-hacker-cyan/20 to-hacker-purple/20 flex items-center justify-center border-b border-hacker-green/30">
                 <div className="text-6xl opacity-50">{project.category === 'Full Stack' ? '🚀' : project.category === 'AI/ML' ? '🤖' : '💬'}</div>
@@ -229,7 +230,7 @@ export default function Projects() {
                     </span>
                   )}
                 </div>
-                <div className="flex gap-3 relative" style={{ zIndex: 100 }}>
+                <div className="flex gap-3 relative" style={{ zIndex: 50 }}>
                   {project.github && (
                     <a
                       href={project.github}
@@ -240,10 +241,10 @@ export default function Projects() {
                         e.preventDefault()
                         window.open(project.github, '_blank', 'noopener,noreferrer')
                       }}
-                      className="text-hacker-cyan hover:text-hacker-purple transition-colors text-sm font-mono cursor-pointer relative"
+                      className="text-hacker-cyan hover:text-hacker-purple transition-colors text-sm font-mono cursor-pointer relative inline-block px-2 py-1 border border-hacker-cyan rounded hover:border-hacker-purple"
                       style={{ 
                         pointerEvents: 'auto',
-                        zIndex: 1000,
+                        zIndex: 100,
                         position: 'relative'
                       }}
                     >
@@ -260,10 +261,10 @@ export default function Projects() {
                         e.preventDefault()
                         window.open(project.live, '_blank', 'noopener,noreferrer')
                       }}
-                      className="text-hacker-purple hover:text-hacker-cyan transition-colors text-sm font-mono cursor-pointer relative"
+                      className="text-hacker-purple hover:text-hacker-cyan transition-colors text-sm font-mono cursor-pointer relative inline-block px-2 py-1 border border-hacker-purple rounded hover:border-hacker-cyan"
                       style={{ 
                         pointerEvents: 'auto',
-                        zIndex: 1000,
+                        zIndex: 100,
                         position: 'relative'
                       }}
                     >

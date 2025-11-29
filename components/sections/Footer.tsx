@@ -27,7 +27,7 @@ export default function Footer() {
                 className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
                 style={{ 
                   pointerEvents: 'auto',
-                  zIndex: 1000,
+                  zIndex: 100,
                   position: 'relative'
                 }}
                 aria-label="GitHub"
@@ -50,7 +50,7 @@ export default function Footer() {
                 className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
                 style={{ 
                   pointerEvents: 'auto',
-                  zIndex: 1000,
+                  zIndex: 100,
                   position: 'relative'
                 }}
                 aria-label="LinkedIn"
@@ -73,7 +73,7 @@ export default function Footer() {
                 className="text-hacker-green/70 hover:text-hacker-cyan transition-colors cursor-pointer relative"
                 style={{ 
                   pointerEvents: 'auto',
-                  zIndex: 1000,
+                  zIndex: 100,
                   position: 'relative'
                 }}
                 aria-label="Twitter"

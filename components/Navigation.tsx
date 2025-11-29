@@ -6,9 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 const navItems = [
   { name: 'HOME', href: '#hero' },
   { name: 'ABOUT', href: '#about' },
+  { name: 'SERVICES', href: '#services' },
   { name: 'SKILLS', href: '#skills' },
   { name: 'PROJECTS', href: '#projects' },
   { name: 'EXPERIENCE', href: '#experience' },
+  { name: 'TESTIMONIALS', href: '#testimonials' },
+  // { name: 'BLOG', href: '#blog' },
   { name: 'CONTACT', href: '#contact' },
 ]
 
@@ -73,6 +76,7 @@ export default function Navigation() {
                 className="text-hacker-green hover:text-hacker-cyan transition-colors relative group font-mono text-sm cursor-pointer relative z-10"
                 style={{ pointerEvents: 'auto' }}
                 whileHover={{ y: -2, filter: 'brightness(1.5)' }}
+                aria-label={`Navigate to ${item.name}`}
               >
                 {'['}{item.name}{']'}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-hacker-green group-hover:w-full transition-all duration-300 shadow-hacker-green" />
